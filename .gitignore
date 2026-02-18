@@ -1,0 +1,15 @@
+# Secrets
+.env
+
+# OS files
+.DS_Store
+
+# Volumes
+data/*
+workspace/*
+!data/.gitkeep
+!workspace/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]

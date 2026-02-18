@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  openclaw-me:
+    image: coollabsio/openclaw:latest
+    container_name: openclaw-me
+    networks:
+      openclaw_net:
+        ipv4_address: 172.20.0.10
+    ports:
+      - "18789:18789"
+      - "8080:18789"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - AUTH_PASSWORD=${AUTH_PASSWORD}
+      - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
+      - OPENCLAW_GATEWAY_TRUSTED_PROXIES=${OPENCLAW_GATEWAY_TRUSTED_PROXIES}
+      - BROWSER_CDP_URL=http://browser:9223
+    volumes:
+      - ./data:/data
+      - ./workspace:/data/workspace
+    depends_on:
+      - browser
+    restart: unless-stopped
+
+  browser:
+    image: ghcr.io/coollabsio/openclaw-browser:latest
+    container_name: openclaw-browser
+    networks:
+      openclaw_net:
+        ipv4_address: 172.20.0.11
+    ports:
+      - "6901:6901"
+    restart: unless-stopped
+
+networks:
+  openclaw_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
