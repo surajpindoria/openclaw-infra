@@ -65,6 +65,8 @@ setup:
 .PHONY: up stop down restart status logs clean-workspace
 
 up:
+	@echo "$(BLUE)⚙️  Rendering config template...$(RESET)"
+	@export $$(cat .env | xargs) && envsubst < configs/config.template.json > data/config.json
 	@echo "$(BLUE)🚀 Starting services...$(RESET)"
 	@docker compose up -d
 	@echo ""

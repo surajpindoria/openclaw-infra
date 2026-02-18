@@ -16,6 +16,7 @@ services:
       - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
       - OPENCLAW_GATEWAY_TRUSTED_PROXIES=${OPENCLAW_GATEWAY_TRUSTED_PROXIES}
       - BROWSER_CDP_URL=http://browser:9223
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
     volumes:
       - ./data:/data
       - ./workspace:/data/workspace
