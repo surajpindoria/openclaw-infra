@@ -10,6 +10,8 @@ services:
     ports:
       - "18789:18789"
       - "8080:18789"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - AUTH_PASSWORD=${AUTH_PASSWORD}
@@ -17,6 +19,11 @@ services:
       - OPENCLAW_GATEWAY_TRUSTED_PROXIES=${OPENCLAW_GATEWAY_TRUSTED_PROXIES}
       - BROWSER_CDP_URL=http://browser:9223
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - DEFAULT_MODEL=llama3.1:8b
+      - OLLAMA_API_KEY=ollama-local
+      - OPENCLAW_AUTH_OLLAMA_KEY=ollama-local
+      - OPENCLAW_AUTH_OLLAMA_USER=default
     volumes:
       - ./data:/data
       - ./workspace:/data/workspace
