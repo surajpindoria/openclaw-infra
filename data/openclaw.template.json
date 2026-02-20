@@ -1,0 +1,73 @@
+{
+    "meta": {
+        "lastTouchedVersion": "2026.2.15",
+        "lastTouchedAt": "2026-02-20T16:42:06.152Z"
+    },
+    "wizard": {
+        "lastRunAt": "2026-02-20T16:42:06.126Z",
+        "lastRunVersion": "2026.2.15",
+        "lastRunCommand": "doctor",
+        "lastRunMode": "local"
+    },
+    "browser": {
+        "cdpUrl": "http://browser:9223"
+    },
+    "models": {
+        "providers": {
+            "ollama": {
+                "baseUrl": "http://host.docker.internal:11434/v1",
+                "api": "openai-completions",
+                "models": [
+                    {
+                        "id": "llama3.3",
+                        "name": "Llama 3.3",
+                        "contextWindow": 128000
+                    }
+                ]
+            }
+        }
+    },
+    "agents": {
+        "defaults": {
+            "model": {
+                "primary": "ollama/llama3.1:8b"
+            },
+            "workspace": "/data/workspace"
+        }
+    },
+    "commands": {
+        "native": "auto",
+        "nativeSkills": "auto"
+    },
+    "channels": {
+        "telegram": {
+            "enabled": true,
+            "dmPolicy": "pairing",
+            "botToken": "${TELEGRAM_BOT_TOKEN}",
+            "allowFrom": [
+                "${TELEGRAM_ALLOW_FROM}"
+            ],
+            "groupPolicy": "allowlist",
+            "streamMode": "partial"
+        }
+    },
+    "gateway": {
+        "port": 18789,
+        "mode": "local",
+        "controlUi": {
+            "enabled": true,
+            "allowInsecureAuth": true
+        },
+        "auth": {
+            "mode": "token",
+            "token": "${OPENCLAW_GATEWAY_TOKEN}"
+        }
+    },
+    "plugins": {
+        "entries": {
+            "telegram": {
+                "enabled": true
+            }
+        }
+    }
+}

@@ -63,8 +63,17 @@ setup:
 
 # --- Operations ---
 .PHONY: up stop down restart status logs clean-workspace
+gen-config:
+	@echo "$(YELLOW)📄 Generating openclaw.json from template...$(RESET)"
+	@if [ ! -d "data/.openclaw" ]; then \
+		echo "$(YELLOW)📁 Creating data/.openclaw directory...$(RESET)"; \
+		mkdir -p data/.openclaw; \
+	fi
+	@export $$(cat .env | xargs) && envsubst < data/openclaw.template.json > data/.openclaw/openclaw.json
+	@echo "$(GREEN)✅ data/openclaw.json generated.$(RESET)"
+	@echo ""
 
-up:
+up: gen-config
 	@echo "$(BLUE)🚀 Starting services...$(RESET)"
 	@docker compose up -d
 	@echo ""
