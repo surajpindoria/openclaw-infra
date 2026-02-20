@@ -8,6 +8,7 @@
 data/*
 workspace/*
 !data/.gitkeep
+!data/openclaw.template.json
 !workspace/.gitkeep
 
 # Python
